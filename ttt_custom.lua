@@ -16,7 +16,7 @@ run(function()
 	sam.command.new("role")
 
 		:SetPermission("role", "admin")
-		:Help("Force a role on player(s) \n(0=Innocent)\n(1=Traitor)\n(2=Detective)")
+		:Help("Force a role on player(s). \n(0=Innocent)\n(1=Traitor)\n(2=Detective)")
 
 		:AddArg("player")
 
@@ -36,11 +36,11 @@ run(function()
 			    local current_role = target:GetRole()
 
 			    if GetRoundState() == 1 or GetRoundState() == 2 then
-				   sam.player.send_message(calling_ply, " The round has not begun")
+				   sam.player.send_message(calling_ply, " The round has not begun.")
 			    elseif not target:Alive() then
-				   sam.player.send_message(calling_ply, " {V_1} is dead", { V_1 = calling_ply:Nick() })
+				   sam.player.send_message(calling_ply, " {V_1} is dead.", { V_1 = calling_ply:Nick() })
 			    elseif current_role == role then
-				   sam.player.send_message(calling_ply, " {V_1} is already that role", { V_1 = calling_ply:Nick() })
+				   sam.player.send_message(calling_ply, " {V_1} is already that role.", { V_1 = calling_ply:Nick() })
 			    else
 			    target:ResetEquipment()
 			    RemoveLoadoutWeapons(target)
@@ -67,7 +67,7 @@ run(function()
 				[2] = "detective",
 			    }
 
-			    sam.player.send_message(calling_ply, " {V_1} is now role {V_2}", { V_1 = calling_ply:Nick(), V_2 = roleName[role] })
+			    sam.player.send_message(calling_ply, " {V_1} is now role {V_2}.", { V_1 = calling_ply:Nick(), V_2 = roleName[role] })
 			    end
 			end
 		end)
@@ -76,7 +76,7 @@ run(function()
 	sam.command.new("respawn")
 
 		:SetPermission("respawn", "admin")
-		:Help("Respawn dead player(s)")
+		:Help("Respawn dead player(s).")
 
 		:AddArg("player")
 
@@ -86,7 +86,7 @@ run(function()
 			    local nick = target:Nick()
 
 			    if GetRoundState() == 1 then
-				   sam.player.send_message(calling_ply, "Can't respawn {V_2} on a inactive round", {V_2 = nick})
+				   sam.player.send_message(calling_ply, "Can't respawn {V_2} on a inactive round.", {V_2 = nick})
 			    elseif target:GetObserverMode() ==  OBS_MODE_NONE then
 				   sam.player.send_message(calling_ply, "{V_2} is already alive", {V_2 = nick})
 			    else
@@ -103,7 +103,7 @@ run(function()
 				target:SetCredits( ( (target:GetRole() == ROLE_INNOCENT) and 0 ) or GetConVarNumber("ttt_credits_starting") )
 
 				SendFullStateUpdate()
-				sam.player.send_message(calling_ply, "{V_2} has been respawned", {V_2 = nick})
+				sam.player.send_message(calling_ply, "{V_2} has been respawned.", {V_2 = nick})
 			    end
 			end
 		end)
@@ -112,7 +112,7 @@ run(function()
 	sam.command.new("karma")
 
 		:SetPermission("karma", "admin")
-		:Help("Set player(s) karma")
+		:Help("Set player(s) karma.")
 
 		:AddArg("player")
 
@@ -132,7 +132,7 @@ run(function()
 
 			    target:SetBaseKarma( karma )
 			    target:SetLiveKarma( karma )
-			    sam.player.send_message(calling_ply, "{V_2} karma has been set to {V_3}", {V_2 = nick, V_3 = karma})
+			    sam.player.send_message(calling_ply, "{V_2} karma has been set to {V_3}.", {V_2 = nick, V_3 = karma})
 			end  
 		end) 
 	:End()
@@ -140,7 +140,7 @@ run(function()
 	sam.command.new("spectator")
 
 		:SetPermission("spectator", "admin")
-		:Help("Force player(s) in or out of spec\n(OUT=0)\n(IN=1)")
+		:Help("Force player(s) in or out of spec.\n(OUT=0)\n(IN=1)")
 
 		:AddArg("player")
 
@@ -161,9 +161,9 @@ run(function()
 			    target:ConCommand("ttt_spectator_mode " .. spec)
 
 			    if spec == 1 then
-				   sam.player.send_message(nil , " {V_1} forced {V_2} in to spectator!", { V_1 = calling_ply:Nick(), V_2 = nick })
+				   sam.player.send_message(nil , " {V_1} forced {V_2} in to spectator.", { V_1 = calling_ply:Nick(), V_2 = nick })
 			    else
-				   sam.player.send_message(nil , " {V_1} forced {V_2} out of spectator!", { V_1 = calling_ply:Nick(), V_2 = nick })
+				   sam.player.send_message(nil , " {V_1} forced {V_2} out of spectator.", { V_1 = calling_ply:Nick(), V_2 = nick })
 			    end
 			end  
 		end) 
@@ -172,7 +172,7 @@ run(function()
 	sam.command.new("give")
 
 		:SetPermission("give", "superadmin")
-		:Help("Give player(s) weapon")
+		:Help("Give player(s) weapon.")
 
 		:AddArg("player")
 
@@ -193,7 +193,7 @@ run(function()
 	sam.command.new("credits")
 
 		:SetPermission("credits", "admin")
-		:Help("Give player(s) credits")
+		:Help("Give player(s) credits.")
 
 		:AddArg("player")
 
@@ -209,7 +209,9 @@ run(function()
 		:OnExecute(function(calling_ply, targets, amount)
 			for i = 1, #targets do
 			    local target = targets[i]
+			    local nick = target:Nick()
 			   target:AddCredits(amount)
+			   sam.player.send_message(calling_ply, "{V_2} has been given {V_3} credits.", {V_2 = nick, V_3 = amount})
 			end
 		end) 
 	:End()
@@ -217,7 +219,7 @@ run(function()
 	sam.command.new("identify")
 
 		:SetPermission("identify", "admin")
-		:Help("Identifies a target's body\n(Missing=0)\n(Found=1)")
+		:Help("Identifies a target's body.\n(Missing=0)\n(Found=1)")
 
 		:AddArg("player")
 
@@ -237,7 +239,7 @@ run(function()
 			    local body = corpse_find( target )
 
 			    if not body then 
-				   sam.player.send_message(calling_ply, "{V_2} body not found!", {V_2 = nick})
+				   sam.player.send_message(calling_ply, "{V_2} body not found.", {V_2 = nick})
 			    return 
 			    end
 
@@ -249,12 +251,12 @@ run(function()
 					    SendConfirmedTraitors(GetInnocentFilter(false))
 					    SCORE:HandleBodyFound( calling_ply, target )
 					end
-					sam.player.send_message(calling_ply, "{V_2} has been marked as found", {V_2 = nick})
+					sam.player.send_message(calling_ply, "{V_2} has been marked as found.", {V_2 = nick})
 			    else
 					CORPSE.SetFound( body, false )
 					target:SetNWBool("body_found", false)
 					SendFullStateUpdate()
-					sam.player.send_message(calling_ply, "{V_2} has been marked as not found", {V_2 = nick})
+					sam.player.send_message(calling_ply, "{V_2} has been marked as not found.", {V_2 = nick})
 			   end
 			end
 		end) 
@@ -265,7 +267,7 @@ run(function()
 	sam.command.new("minply")
 
 	    :SetPermission("minply", "superadmin")
-	    :Help("The amount of players required to start a game")
+	    :Help("The amount of players required to start a game.")
 
 	    :AddArg("number", {
 	        optional = true,
@@ -284,17 +286,17 @@ run(function()
 	sam.command.new("preventwin")
 
 	    :SetPermission("preventwin", "superadmin")
-	    :Help("Toggles the prevention of winning")
+	    :Help("Toggles the prevention of winning.")
 
 	    :OnExecute(function(calling_ply, targets)
 	    	local toggle = GetConVar( "ttt_debug_preventwin" ):GetInt()
 
 			if toggle == 1 then
 			   RunConsoleCommand("ttt_debug_preventwin", 0)
-			   sam.player.send_message(nil , " {V_1} allowed the round to end as normal", { V_1 = calling_ply:Nick() })
+			   sam.player.send_message(nil , " {V_1} allowed the round to end as normal.", { V_1 = calling_ply:Nick() })
 			else
 			   RunConsoleCommand("ttt_debug_preventwin", 1)
-			   sam.player.send_message(nil , " {V_1} prevented the round from ending untill timeout", { V_1 = calling_ply:Nick() })
+			   sam.player.send_message(nil , " {V_1} prevented the round from ending untill timeout.", { V_1 = calling_ply:Nick() })
 			end
 	    end)
 	:End()
@@ -302,11 +304,11 @@ run(function()
 	sam.command.new("roundrestart")
 
 	    :SetPermission("roundrestart", "superadmin")
-	    :Help("Restarts the round")
+	    :Help("Restarts the round.")
 
 	    :OnExecute(function(calling_ply, targets)
 		   RunConsoleCommand("ttt_roundrestart", "\n")
-		   sam.player.send_message(nil , " {V_1} has restarted the round", { V_1 = calling_ply:Nick() })
+		   sam.player.send_message(nil , " {V_1} has restarted the round.", { V_1 = calling_ply:Nick() })
 	    end)
 
 	:End()
