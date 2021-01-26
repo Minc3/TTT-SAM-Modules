@@ -172,7 +172,7 @@ run(function()
 	sam.command.new("give")
 
 		:SetPermission("give", "superadmin")
-		:Help("Gives player(s) weapon")
+		:Help("Give player(s) weapon")
 
 		:AddArg("player")
 
