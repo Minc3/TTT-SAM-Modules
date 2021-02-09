@@ -38,7 +38,7 @@ run(function()
 		sam.command.new("bot_mimic")
 
 			:SetPermission("sv_cheats", "superadmin")
-			:Help("bots will mimic player\n(sv_cheats 1) required")
+			:Help("bots will mimic player")
 
 
 		    :OnExecute(function(calling_ply, targets)
