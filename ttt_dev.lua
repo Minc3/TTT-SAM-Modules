@@ -37,7 +37,7 @@ run(function()
 
 		sam.command.new("bot_mimic")
 
-			:SetPermission("sv_cheats", "superadmin")
+			:SetPermission("bot_mimic", "superadmin")
 			:Help("bots will mimic player")
 
 
