@@ -31,6 +31,7 @@ run(function()
 
 		:OnExecute(function(calling_ply, targets, role)
 			for i = 1, #targets do
+			    local nick = target:Nick()
 			    local target = targets[i]
 
 			    local current_role = target:GetRole()
@@ -38,9 +39,9 @@ run(function()
 			    if GetRoundState() == 1 or GetRoundState() == 2 then
 				   sam.player.send_message(calling_ply, " The round has not begun.")
 			    elseif not target:Alive() then
-				   sam.player.send_message(calling_ply, " {V_1} is dead.", { V_1 = calling_ply:Nick() })
+				   sam.player.send_message(calling_ply, " {V_1} is dead.", { V_1 = nick })
 			    elseif current_role == role then
-				   sam.player.send_message(calling_ply, " {V_1} is already that role.", { V_1 = calling_ply:Nick() })
+				   sam.player.send_message(calling_ply, " {V_1} is already that role.", { V_1 = nick })
 			    else
 			    target:ResetEquipment()
 			    RemoveLoadoutWeapons(target)
