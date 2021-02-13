@@ -31,8 +31,8 @@ run(function()
 
 		:OnExecute(function(calling_ply, targets, role)
 			for i = 1, #targets do
-			    local nick = target:Nick()
 			    local target = targets[i]
+			    local nick = target:Nick()
 
 			    local current_role = target:GetRole()
 
