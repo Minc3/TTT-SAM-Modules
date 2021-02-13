@@ -68,7 +68,7 @@ run(function()
 				[2] = "detective",
 			    }
 
-			    sam.player.send_message(calling_ply, " {V_1} is now role {V_2}.", { V_1 = calling_ply:Nick(), V_2 = roleName[role] })
+			    sam.player.send_message(calling_ply, " {V_1} is now role {V_2}.", { V_1 = nick, V_2 = roleName[role] })
 			    end
 			end
 		end)
