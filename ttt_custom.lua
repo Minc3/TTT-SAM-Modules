@@ -297,7 +297,7 @@ run(function()
 			   sam.player.send_message(nil , " {V_1} allowed the round to end as normal.", { V_1 = calling_ply:Nick() })
 			else
 			   RunConsoleCommand("ttt_debug_preventwin", 1)
-			   sam.player.send_message(nil , " {V_1} prevented the round from ending untill timeout.", { V_1 = calling_ply:Nick() })
+			   sam.player.send_message(nil , " {V_1} prevented the round from ending until timeout.", { V_1 = calling_ply:Nick() })
 			end
 	    end)
 	:End()
